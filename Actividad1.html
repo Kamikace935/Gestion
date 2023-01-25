@@ -7,19 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" id="user" onfocusout="usuario">
+    <input type="text" id="user" onblur="usuario()">
     <br/>
-    <input type="text" id="pwd" onfocusout="">
+    <input type="text" id="pwd" onblur="">
     <br/>
-    <input type="button" name="acceso" id="send">
+    <input type="button" id="action">
 
     <script LANGUAGE="JavaScript">
         function usuario(){
             var user = document.getElementById("user");
 
-            if(user.startsWith('_')){
-               document.getElementById(pwd).setAttribute("input", "hidden");
-            }else if(user.includes()){
+            if(user.value.startsWith('_')){
+               document.getElementById("pwd").setAttribute("input", "hidden");
+            }else if(user.value.includes()){
 
             }
         }

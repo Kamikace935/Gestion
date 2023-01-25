@@ -12,15 +12,21 @@
         var max = 0; 
         var pos;
         
-        var arr = new Array();
+        var arr = fillArray(5);
 
 
         for(let i = 0; i < arr; i++){
-
+            
         }
 
         function fillArray(size){
-            
+            var arr = new Array();
+
+            for(let i=0; i<arr.length;i++){
+                arr[i] = Math.floor(Math.random()*26);
+            }
+
+            return arr;
         }
     </script>
 </body>
