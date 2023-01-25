@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="user" onfocusout="usuario">
+    <br/>
+    <input type="text" id="pwd" onfocusout="">
+    <br/>
+    <input type="button" name="acceso" id="send">
+
+    <script LANGUAGE="JavaScript">
+        function usuario(){
+            var user = document.getElementById("user");
+
+            if(user.startsWith('_')){
+               document.getElementById(pwd).setAttribute("input", "hidden");
+            }else if(user.includes()){
+
+            }
+        }
+    </script>
+
+</body>
+</html>
