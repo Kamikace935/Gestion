@@ -7,22 +7,41 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" id="user" onblur="usuario()">
+    <input type="text" id="user" onblur="usuario()" onfocus="rebot()">
     <br/>
-    <input type="text" id="pwd" onblur="">
+    <input type="password" id="pwd" onblur="">
     <br/>
     <input type="button" id="action">
 
     <script LANGUAGE="JavaScript">
         function usuario(){
-            var user = document.getElementById("user");
+            var user = document.getElementById("user").value;
+            var pwd = document.getElementById("pwd");
 
-            if(user.value.startsWith('_')){
-               document.getElementById("pwd").setAttribute("input", "hidden");
-            }else if(user.value.includes()){
-
+            if(user.startsWith('_')){
+               pwd.setAttribute("type", "hidden");
+            }else if(user.startsWith('x') || user.startsWith('X')){
+                pwd.style.color="";
+                pwd.style.fontSize="";
+            }
+            
+            if(containsNumber(user)){
+                pwd.maxLength=8;
+            }else{
+                pwd.maxLength=1;
             }
         }
+
+        function containsNumber (x){
+            //La expresion /\d/ equivale a [0-9]
+            return /\d/.test(x);
+        } 
+
+        function rebot(){
+            pwd.setAttribute("type", "password");
+        }
+
+
     </script>
 
 </body>
