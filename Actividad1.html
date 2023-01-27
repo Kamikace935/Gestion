@@ -7,38 +7,37 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" id="user" onblur="usuario()" onfocus="rebot()">
-    <br/>
-    <input type="password" id="pwd" onblur="">
-    <br/>
-    <input type="button" id="action">
+    
+        <label for="user">Usuario:</label>
+        <input type="text" id="user" onblur="usuario()" onfocus="rebot()">
+        <br/>
+        <label id="a" for="pwd">Contraseña:</label>
+        <input type="password" id="pwd" onclick="rebot">
+    
+
 
     <script LANGUAGE="JavaScript">
         function usuario(){
             var user = document.getElementById("user").value;
             var pwd = document.getElementById("pwd");
+            var a = document.getElementById("a").value;
 
             if(user.startsWith('_')){
                pwd.setAttribute("type", "hidden");
             }else if(user.startsWith('x') || user.startsWith('X')){
-                pwd.style.color="";
-                pwd.style.fontSize="";
+                a.style.color="#FF0000";
+                a.style.fontSize="2.4em";
             }
-            
-            if(containsNumber(user)){
+            //La expresion /\d/ equivale a [0-9] 
+            if(/\d/.test(user)){
                 pwd.maxLength=8;
             }else{
                 pwd.maxLength=1;
             }
         }
 
-        function containsNumber (x){
-            //La expresion /\d/ equivale a [0-9]
-            return /\d/.test(x);
-        } 
-
         function rebot(){
-            pwd.setAttribute("type", "password");
+            document.getElementById("box").reset();
         }
 
 
