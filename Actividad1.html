@@ -19,12 +19,13 @@
             left: 20px;
             top: 20px;
         }
+
     </style>
 </head>
 <body>
     <div id="main">
         <label for="user">Usuario:</label>
-        <input type="text" id="user" onblur="usuario()" onfocus="rebot()">
+        <input type="text" id="user" onblur="usuario()">
         <br/>
         <label id="a" for="pwd">Contraseña:</label>
         <input type="password" id="pwd" onmouseover="lights(1)" onmouseout="lights(0)" onkeypress="login(event)">
@@ -36,20 +37,24 @@
     </div>
 
     <script LANGUAGE="JavaScript">
+        var user = document.getElementById("user");
+        var pwd = document.getElementById("pwd");
+        var a = document.getElementById("a");
+        var lamp = document.getElementById("lup");
+        var box = document.getElementById("box");
+
         function usuario(){
-            var user = document.getElementById("user").value;
-            var pwd = document.getElementById("pwd");
-            var a = document.getElementById("a");
+            
 
             /*1.Esconde el elemnto pwd si el string que recoge el elemento user 
             * lleva '_' en la primera posición*/
-            if(user.startsWith('_')){
+            if(user.value.startsWith('_')){
                pwd.setAttribute("type", "hidden");
 
             /*3.Cuando el String que recoja el elemento user empiece con
             * la letra x hara que el texto contenido en el elemento label
             * doble su tamaño y cambie el colo de la fuente a rojo*/
-            }else if(user.startsWith('x') || user.startsWith('X')){
+            }else if(user.value.startsWith('x') || user.value.startsWith('X')){
                 a.style.color="#FF0000";
                 a.style.fontSize="2em";
             }
@@ -57,7 +62,7 @@
             * user contenga algun número con la expresion /\d/, que
             * equivale a [0-9], y el metodo .test() que busca una igualdad
             * entre la expresión y el string introducido*/ 
-            if(/\d/.test(user)){
+            if(/\d/.test(user.value)){
                 pwd.maxLength=8;
             }else{
                 pwd.maxLength=1;
@@ -67,17 +72,28 @@
         /*4.Cambia el estado del atributo del elemento lup para que sea visible
         * dependiendo del parametro enviado al tener el raton encima del elemento pwd*/
         function lights(x){
-            if(x==1){
-                document.getElementById("lup").style.visibility="visible";
-                //document.getElementById("lout").style.visibility="hidden";
-            }else if(x==0){
-                document.getElementById("lup").style.visibility="hidden";
-                //document.getElementById("lout").style.visibility="visible";
-            }
+            var lup = document.getElementById("lup");
+            //var lout = document.getElementById("lout");
+            if(lup != null){
+                if(x==1){
+                    lup.style.visibility="visible";
+                    //lout.style.visibility="hidden";
+                }else if(x==0){
+                    lup.style.visibility="hidden";
+                    //lout.style.visibility="visible";
+                }
+            }    
         }
 
-        function login(key){
-            if(key == 13)
+        function login(key){            
+            /*5.Recogemos un evento al pulsar una tecla, comprobamos que sea 
+            * el enter y despues que el String recogido en el elemento sea el
+            * que queremos. Remplazamos*/
+            if(key.keyCode == 13){
+                if(!pwd.value.localeCompare("jeje")){
+                    lup.outerHTML = `<h1>Bienvenido ${user.value}</h1>`;
+                }
+            }
         }
     </script>
 
