@@ -17,7 +17,7 @@
         img{
             position:absolute;
             left: 20px;
-            top: 20px;
+            top: 60px;
         }
 
     </style>
@@ -30,7 +30,7 @@
         <label id="a" for="pwd">Contraseña:</label>
         <input type="password" id="pwd" onmouseover="lights(1)" onmouseout="lights(0)" onkeypress="login(event)">
         <br>
-        <div class="box">
+        <div>
             <img src="./img/pic_bulbon.gif" alt="bombilla encendida" id="lup" >
             <!--<img src="./img/pic_bulboff.gif" alt="bombilla apagada" id="lout">-->
         </div>
@@ -42,6 +42,7 @@
         var a = document.getElementById("a");
         var lamp = document.getElementById("lup");
         var box = document.getElementById("box");
+        
 
         function usuario(){
             
@@ -85,13 +86,21 @@
             }    
         }
 
-        function login(key){            
+        var cont = 3;
+        function login(key){
             /*5.Recogemos un evento al pulsar una tecla, comprobamos que sea 
             * el enter y despues que el String recogido en el elemento sea el
             * que queremos. Remplazamos*/
             if(key.keyCode == 13){
                 if(!pwd.value.localeCompare("jeje")){
                     lup.outerHTML = `<h1>Bienvenido ${user.value}</h1>`;
+            /*6.Cuando la comprobación de falso se restara un intento. Al gastar
+             * los intentos sustituira el div main por un mensaje pidiendo disculpas.*/
+                }else{
+                    cont --; 
+                    if(cont == 0){
+                        main.outerHTML = `<h1>Lo siento ${user.value}</h1>`
+                    }
                 }
             }
         }
