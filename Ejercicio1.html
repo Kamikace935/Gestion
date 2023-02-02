@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        
+        var x = [4,5,6,7]; y = 6;
+        console.log(x);
+
+        function pepe(a,b){
+            a[3]=48;
+            b=1000;
+            console.log(x);
+            console.log(a);
+        }
+
+        
+        pepe(x,y);
+
+        console.log(x[3]);
+
+        //console.log(numTree(1,0,3));
+        function numTree(x,y,num,mul){
+            res = "1";
+            for(var i=0;i<=y;i++){
+                if(mul == 5){
+                    res = "("+res+" + "+mul+")";
+                }else if(mul == 3){
+                    res = "("+res+" * "+mul+")";
+                }
+            }
+
+            if(x == num){
+                console.log(res + "="+ x);
+                return true;
+            }else if(x > num){ 
+                console.log(res + "="+ x);
+              return false;
+            }else{
+                console.log(res);
+                return numTree(x+5,y+1,num,5)||numTree(x*3,y+1,num,3);
+            }
+        }
+        
+    </script>
+</body>
+</html>
