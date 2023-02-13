@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        //Ejercicio 1
+        function ristra(x, y, z) {
+            var arr = new Array();
+
+            switch (arguments.length) {
+                case 2:
+                    if (x < y) {
+                        for (let i = x; i <= y; i++) {
+                            arr.push(i);
+                        }
+                        return arr;
+                    } else {
+                        for (let i = x; i >= y; i--) {
+                            arr.push(i);
+                        }
+                        return arr;
+                    }
+                //Ejercicio 2
+                case 3:
+
+                    if (z > 0) {
+                        for (let i = x; i <= y; i += z) {
+                            arr.push(i);
+                        }
+                        return arr;
+
+                    } else if (z < 0) {
+                        for (let i = x; i >= y; i += z) {
+                            arr.push(i)
+                        }
+                        return arr;
+                    }
+
+                default:
+                    return -1;
+            }
+        }
+
+        //console.log(ristra(10,1));
+        console.log(ristra(1, 10, 2));
+        //console.log(ristra(5,2,-1));
+        //Ejercicio 1.2
+        /*function suma(arr) {
+            let sum = 0;
+            for(let i = 0; i<arr.length;i++) {
+                sum = sum + arr[i];
+            }
+
+            return sum
+        }*/
+
+        //console.log(suma(ristra(1,10)));
+
+
+    </script>
+</body>
+
+</html>
