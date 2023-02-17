@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function arrayALista(liar) {
+            if (Array.isArray(liar)) {
+                let lista = {}
+                let p = lista
+                for (i = 0; i < liar.length; i++) {
+                    p.nombre = liar[i]
+                    p.nota = null
+                    if (i == (liar.length - 1)) {
+                        p.sig = null
+                    } else {
+                        p.sig = {}
+                    }
+                    p = p.sig
+                }
+                return lista
+            } else {
+                return "esto no es un array"
+            }
+        }
+
+        arr = ["Marta", "Jorge", "Aitor"]
+        var list = arrayALista(arr)
+        console.log(list)
+
+        function listaAArray(liar) {
+            let arr = []
+            let obj = null
+
+            do {
+                if (obj !== null) {
+                    arr.push(obj.nombre)
+                    obj = obj.sig
+                } else {
+                    arr.push(liar.nombre)
+                    obj = liar.sig
+
+                }
+            } while (obj.sig !== null)
+
+            arr.push(obj.nombre)
+            return arr
+        }
+
+        var arra = listaAArray(list)
+        console.log(arra)
+
+        function personaN(n) {
+            let run = n
+            let obj = null
+            while (run != 0) {
+                if (obj !== null) {
+                    if (obj.sig !== null) {
+                        obj = obj.sig
+                    } else {
+                        console.log("no hay nadie en esa posicion")
+                    }
+                } else {
+                    obj = list
+                }
+                run--
+            }
+            return obj
+        }
+
+        var segundo = personaN(2)
+        console.log(segundo)
+
+        function modifNota(n, note) {
+            let obj = personaN(n)
+            obj.note = note
+        }
+
+        console.log(personaN(2).note)
+        modifNota(2, "no es alguien muy estudioso")
+        console.log(personaN(2).note)
+
+        function anadir(name, note) {
+            let help = list 
+            if (note !== undefined) {
+                list = {
+                    nombre: name,
+                    nota: note,
+                    sig: null
+                }
+            } else {
+                list = {
+                    nombre: name,
+                    nota: null,
+                    sig: null
+                }
+            }
+            list.sig = help
+        }
+
+        anadir("pepe","este si que estudia")
+        console.log(list)
+    </script>
+</body>
+
+</html>

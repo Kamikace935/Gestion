@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var year = anio(1900)
+
+        function crearNodoPadre() {
+            return {
+                nombre: "Ricardo",
+                anoNac: year(),
+                sexo: "H",
+                conyuge: null,
+                anoNacCon: null,
+                hijos: []
+            }
+        }
+
+        function buscar(lista, nombre, anio) {
+            let nodo
+            for (i = 0; i < lista.length; i++) {
+                if (lista[i].nombre === nombre && lista[i].anoNac == anio) {
+                    return lista[i]
+                } else if (lista[i].hijos.length !== 0) {
+                    return buscar(lista[i].hijos, nombre,anio)
+                } else {
+                    nodo = null
+                }
+            }
+            return nodo
+        }
+
+        function anadirHijo(lista, nodo) {
+            lista.push(nodo)
+        }
+
+        function anio(n) {
+            let local = n
+            return () => local++
+        }
+
+        nodoP = crearNodoPadre()
+
+        var hijo = {
+            nombre: "Pepito",
+                anoNac: year(),
+                sexo: "H",
+                conyuge: null,
+                anoNacCon: null,
+                hijos: []
+        }
+        
+        anadirHijo(nodoP.hijos, hijo)
+
+        hijo = {
+            nombre: "Melani",
+                anoNac: year(),
+                sexo: "M",
+                conyuge: null,
+                anoNacCon: null,
+                hijos: []
+        }
+
+        anadirHijo(nodoP.hijos, hijo)
+
+        hijo = {
+            nombre: "kevin",
+                anoNac: year(),
+                sexo: "H",
+                conyuge: null,
+                anoNacCon: null,
+                hijos: []
+        }
+        
+        nodoH = buscar(nodoP.hijos,Pepito,1901)
+
+        anadirHijo(nodo.hijos, hijo)
+
+        console.log(nodoP)
+
+    </script>
+</body>
+
+</html>
