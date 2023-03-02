@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="C:\Users\pabli\Desktop\DA2D1E-2023\Ejemplos\04 Funciones Orden Mayor\scripts.js"></script>
+</head>
+<body>
+    <script>
+        var a
+        b = SCRIPTS.reduce((acc,cv) => acc + cv.direction == "rtl"?1:0)
+        console.log(a)
+
+        var b = SCRIPTS.map(x => x.direction).reduce((acc, cv) => acc + 1,0)
+        console.log(b)
+
+        var cosa
+
+        cosa = SCRIPTS.reduce((acc,cv) => acc + cv.ranges.reduce((ac,[i,j]) => ac + (j-i),0),0)
+        console.log(cosa)
+
+        cosa = SCRIPTS.reduce((acc,cv) => acc + cv.ranges.reduce((ac,[i,j]) => ac + (j-i),0),0)
+
+        SCRIPTS.map(e => {
+            name: e.name,
+            num: contarcaracteres(e.ranges)
+        }).sort()
+
+        function
+
+    </script>
+</body>
+</html>

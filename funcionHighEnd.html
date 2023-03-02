@@ -14,7 +14,29 @@
                return p
         });
 
+        a = b.reduce((acc,cv) => acc+cv)
         console.log(a)
+        
+
+        b =[ 
+            [1,2,3],
+            [4,5,6],
+            [7,8,9]
+        ]
+
+        a = b.reduce((acc,cv) => acc.concat(cv),[]);
+        console.log(a)
+
+        var cosa = []
+        b.reduce((acc,cv) => {
+                cosa.push(cv.reduce((ac,c) => ac + c))
+            }
+        ,[]);
+        console.log(cosa)
+
+        var puto = []
+
+        
     </script>
 </body>
 </html>
