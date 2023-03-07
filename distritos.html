@@ -347,11 +347,12 @@
 
         //Funcion C
         function sumVotos(voto) {
-            return voto.votos.reduce((a,v) => a + v.reduce((ac, vc) => ac + vc, 0), 0)
+            console.log(voto)
+            return voto.reduce((a,v) => a + v == null || v.votos == null ? 0 : v.votos.reduce((ac, vc) => ac + vc, 0), 0)
         }
 
         console.log("Parte C")
-        //console.log(sumVotos(idp))
+        console.log(sumVotos(idp))
 
         b = JSON.stringify({a:3, b:"hola"})
         console.log(b)
