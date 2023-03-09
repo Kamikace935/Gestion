@@ -1,5 +1,5 @@
 //console.log(document.querySelector("tr"))
-console.log(document.getElementsByTagName("div"))
+console.log(document.getElementsByTagName("td"))
 
 //Parte 1
 let filasTabla = document.getElementsByTagName("tr")
@@ -18,3 +18,7 @@ contenedores[1].setAttribute("style", "border-color: black;" +
                                                         "border-width: 2px;")
 
 //Parte 5
+let segundones = document.getElementsByTagName("span")
+let huecos = document.getElementsByTagName("td")
+
+//textContent
