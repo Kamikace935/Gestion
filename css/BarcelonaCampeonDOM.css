@@ -1,0 +1,31 @@
+
+.verde {
+    color: darkmagenta;
+    margin-left: 12px;
+    margin-top: 5px;
+    border: 15px solid green;
+    width: 40em
+}
+
+th,
+td {
+    padding: 5px;
+}
+
+th {
+    text-align: left;
+}
+
+#quesevea {
+    width: 30em;
+    color: blue;
+}
+
+img {
+    width: 40px;
+
+}
+
+span{
+    font-size: xx-small;
+}
