@@ -10,7 +10,7 @@ filasTabla[2].setAttribute("style", "background-color: #BFF9F6")
 
 //Parte3
 let pepes = document.querySelectorAll("p")
-pepes.forEach(x => x.setAttribute("style", "color: brown"))
+pepes.forEach((x) => x.setAttribute("style", "color: brown"))
 
 //Parte 4
 let contenedores = document.getElementsByTagName("div")
@@ -29,9 +29,9 @@ pepes[1].outerHTML = ""
 
 //DOM-2
 columnas = filasTabla[0].getElementsByTagName("th")
+let acomodador = ""
+let perchero = ""
 for (let i = 0; i<(columnas.length);i++) {
-    var acomodador
-    var perchero
     if (i){
         acomodador = perchero
         perchero = columnas[i].textContent
@@ -48,16 +48,11 @@ for (let i = 1; i < filasTabla.length; i++) {
     columnas = filasTabla[i].getElementsByTagName("td")
     columnas[1].textContent = `${i}`
 }
-/*let wrapper = document.getElementsByTagName("img")[0]
-columnas = filasTabla[1].getElementsByTagName("td")
-columnas[1].appendChild(wrapper)*/
 
 //Parte 2
-
-
 let wrapper;
 for (let i = 0; i < filasTabla.length; i++) {
-    var ultimos5 = [
+    let ultimos5 = [
         [1, -1, 1, 1, 1],
         [0, 0, 1, 1, -1],
         [1, 0, 1, 1, 0],
@@ -103,3 +98,23 @@ function palmares(columna, ultimos) {
 }
 
 //Parte 3
+let primero = filasTabla[1].getAttribute("style")
+let segundo = filasTabla[2].getAttribute("style")
+
+for (let i = 1; i<filasTabla.length; i++) {
+    filasTabla[i].addEventListener("mouseover",function() {
+        filasTabla[i].setAttribute("style", "background: purple; color: white;")
+    })
+
+    filasTabla[i].addEventListener("mouseout",function() {
+        if(i === 1){
+            filasTabla[i].setAttribute("style", primero)
+        }else if(i === 2){
+            filasTabla[i].setAttribute("style", segundo)
+        }else{
+            filasTabla[i].setAttribute("style", "background: white; color: purple;")
+        }
+    })
+}
+
+//Parte 4
