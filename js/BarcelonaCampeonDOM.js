@@ -1,5 +1,5 @@
 //console.log(document.querySelector("tr"))
-//console.log(document.getElementsByTagName("td"))
+console.log(document.getElementsByTagName("tr"))
 
 //Parte 1
 let filasTabla = document.querySelectorAll("tr")
@@ -53,24 +53,53 @@ columnas = filasTabla[1].getElementsByTagName("td")
 columnas[1].appendChild(wrapper)*/
 
 //Parte 2
-let ultimos5 = [
-    [1,-1,1,1,1],
-    [0,0,1,1,-1],
-    [1,0,1,1,0],
-    [0,-1,0,1,-1],
-    [0,1,1,1,-1]
-]
 
+
+let wrapper;
 for (let i = 0; i < filasTabla.length; i++) {
-    columnas = filasTabla[i].getElementsByTagName("td")
+    var ultimos5 = [
+        [1, -1, 1, 1, 1],
+        [0, 0, 1, 1, -1],
+        [1, 0, 1, 1, 0],
+        [0, -1, 0, 1, -1],
+        [0, 1, 1, 1, -1]
+    ]
+
     if (i) {
-
-    }else {
-
-        //filasTabla[i].appendChild()
+        wrapper = document.createElement("td")
+        filasTabla[i].appendChild(wrapper)
+        columnas = filasTabla[i].getElementsByTagName("td")
+        palmares(columnas[columnas.length - 1], ultimos5[i - 1])
+    } else {
+        wrapper = document.createElement("th")
+        wrapper.textContent = "Últimos 5"
+        filasTabla[i].appendChild(wrapper)
     }
-
-
 }
 
+function palmares(columna, ultimos) {
+    for (let i=0;i<ultimos.length;i++) {
+        switch (ultimos[i]) {
+            case 1:
+                wrapper =document.createElement("img")
+                wrapper.src = "../img/tickverde.jpg"
+                columna.appendChild(wrapper)
+                break;
+            case 0:
+                wrapper =document.createElement("img")
+                wrapper.src = "../img/circulo.png"
+                columna.appendChild(wrapper)
+                console.log(wrapper)
+                break;
+            case -1:
+                wrapper =document.createElement("img")
+                wrapper.src = "../img/cruzroja.jpg"
+                columna.appendChild(wrapper)
+                break;
+            default:
+                console.log("se me fue el dedo")
+        }
+    }
+}
 
+//Parte 3
