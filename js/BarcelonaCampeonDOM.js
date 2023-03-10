@@ -1,5 +1,5 @@
 //console.log(document.querySelector("tr"))
-console.log(document.getElementsByTagName("p"))
+console.log(document.getElementsByTagName("td"))
 
 //Parte 1
 let filasTabla = document.getElementsByTagName("tr")
@@ -26,5 +26,14 @@ huecos[7].textContent = segundones[1].textContent
 
 //Parte 6
 pepes[1].outerHTML = ""
+
+//DOM-2
+//Parte 1
+huecos[9].textContent = "3"
+huecos[13].textContent = "4"
+huecos[17].textContent = "5"
+
+//Parte 2
+
 
 
