@@ -118,3 +118,14 @@ for (let i = 1; i<filasTabla.length; i++) {
 }
 
 //Parte 4
+for (let i = 1;i<filasTabla.length;i++){
+    columnas = filasTabla[i].getElementsByTagName("td")
+    
+    columnas[2].addEventListener("mouseover",function() {
+
+    })
+
+    columnas[2].addEventListener("mouseout",function() {
+
+    })
+}
