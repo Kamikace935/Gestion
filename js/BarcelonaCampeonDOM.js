@@ -117,10 +117,11 @@ for (let i = 1; i<filasTabla.length; i++) {
     })
 }
 
-//Parte 4 y 5
+//Parte 4, 5 y 6
+//4
 feliz = document.getElementsByTagName("img")[0]
 wrapper = document.createElement("img")
-//var cont = [0,0,0,0,0]
+//5
 let cont = [
     {equipo: "",visita: 0},
     {equipo: "",visita: 0},
@@ -131,6 +132,7 @@ let cont = [
 
 for (let i = 1;i<filasTabla.length;i++) {
     let equipo = filasTabla[i].getElementsByTagName("td")[2]
+    //5
     cont[i-1].equipo = equipo.textContent
 
     equipo.addEventListener("mouseover",function() {
@@ -138,36 +140,79 @@ for (let i = 1;i<filasTabla.length;i++) {
         if(i === 1)
             escudo.removeChild(feliz)
         wrapper.setAttribute("src", escudoEquipo(i,cont))
-        cont.forEach(x => console.log(x))
         escudo.appendChild(wrapper)
     })
 
     equipo.addEventListener("mouseout",function() {
+        //4
         let escudo = filasTabla[i].getElementsByTagName("td")[0]
         escudo.removeChild(wrapper)
         if(i === 1)
             escudo.appendChild(feliz)
-        console.log("-------------")
+        //6
+        if(document.getElementById("lista") != null)
+            document.body.removeChild(document.getElementById("lista"))
+
+        document.body.appendChild(popularidad(cont))
     })
 }
+//6
+document.body.appendChild(popularidad(cont))
 
+//4-5-6
 function escudoEquipo(x,cont) {
+    let equipo
     switch (x) {
         case 1:
-            cont[x-1].visita++
+            equipo = filasTabla[1].getElementsByTagName("td")[2]
+            cont.map((cont) => {
+                if(cont.equipo === equipo.textContent)
+                    cont.visita++
+            })
             return "../img/barça.png"
         case 2:
-            cont[x-1].visita++
+            equipo = filasTabla[2].getElementsByTagName("td")[2]
+            cont.map((cont) => {
+                if(cont.equipo === equipo.textContent)
+                    cont.visita++
+            })
             return "../img/RM.png"
         case 3:
-            cont[x-1].visita++
+            equipo = filasTabla[3].getElementsByTagName("td")[2]
+            cont.map((cont) => {
+                if(cont.equipo === equipo.textContent)
+                    cont.visita++
+            })
             return "../img/AM.png"
         case 4:
-            cont[x-1].visita++
+            equipo = filasTabla[4].getElementsByTagName("td")[2]
+            cont.map((cont) => {
+                if(cont.equipo === equipo.textContent)
+                    cont.visita++
+            })
             return "../img/RS.png"
         case 5:
-            cont[x-1].visita++
+            equipo = filasTabla[5].getElementsByTagName("td")[2]
+            cont.map((cont) => {
+                if(cont.equipo === equipo.textContent)
+                    cont.visita++
+            })
             return "../img/betis.jpg"
     }
 }
+
+//6
+function popularidad(x){
+    x.sort((a, b) => b.visita - a.visita)
+    let cuerpo = document.createElement("div")
+    cuerpo.setAttribute("id", "lista")
+    x.forEach((y) =>{
+        let contenedor = document.createElement("p")
+        contenedor.textContent = `${y.equipo}: ${y.visita}`
+        cuerpo.appendChild(contenedor)
+    })
+    return cuerpo
+}
+
+
 
