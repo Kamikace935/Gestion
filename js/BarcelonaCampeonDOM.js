@@ -117,18 +117,28 @@ for (let i = 1; i<filasTabla.length; i++) {
     })
 }
 
-//Parte 4
+//Parte 4 y 5
 feliz = document.getElementsByTagName("img")[0]
 wrapper = document.createElement("img")
+//var cont = [0,0,0,0,0]
+let cont = [
+    {equipo: "",visita: 0},
+    {equipo: "",visita: 0},
+    {equipo: "",visita: 0},
+    {equipo: "",visita: 0},
+    {equipo: "",visita: 0}
+]
 
 for (let i = 1;i<filasTabla.length;i++) {
     let equipo = filasTabla[i].getElementsByTagName("td")[2]
+    cont[i-1].equipo = equipo.textContent
 
     equipo.addEventListener("mouseover",function() {
         let escudo = filasTabla[i].getElementsByTagName("td")[0]
         if(i === 1)
             escudo.removeChild(feliz)
-        wrapper.setAttribute("src", escudoEquipo(i))
+        wrapper.setAttribute("src", escudoEquipo(i,cont))
+        cont.forEach(x => console.log(x))
         escudo.appendChild(wrapper)
     })
 
@@ -137,22 +147,27 @@ for (let i = 1;i<filasTabla.length;i++) {
         escudo.removeChild(wrapper)
         if(i === 1)
             escudo.appendChild(feliz)
+        console.log("-------------")
     })
 }
 
-function escudoEquipo(x) {
+function escudoEquipo(x,cont) {
     switch (x) {
         case 1:
+            cont[x-1].visita++
             return "../img/barça.png"
         case 2:
+            cont[x-1].visita++
             return "../img/RM.png"
         case 3:
+            cont[x-1].visita++
             return "../img/AM.png"
         case 4:
+            cont[x-1].visita++
             return "../img/RS.png"
         case 5:
+            cont[x-1].visita++
             return "../img/betis.jpg"
     }
 }
 
-//Parte 5
