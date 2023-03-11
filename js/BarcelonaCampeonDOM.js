@@ -118,14 +118,41 @@ for (let i = 1; i<filasTabla.length; i++) {
 }
 
 //Parte 4
-for (let i = 1;i<filasTabla.length;i++){
-    columnas = filasTabla[i].getElementsByTagName("td")
-    
-    columnas[2].addEventListener("mouseover",function() {
+feliz = document.getElementsByTagName("img")[0]
+wrapper = document.createElement("img")
 
+for (let i = 1;i<filasTabla.length;i++) {
+    let equipo = filasTabla[i].getElementsByTagName("td")[2]
+
+    equipo.addEventListener("mouseover",function() {
+        let escudo = filasTabla[i].getElementsByTagName("td")[0]
+        if(i === 1)
+            escudo.removeChild(feliz)
+        wrapper.setAttribute("src", escudoEquipo(i))
+        escudo.appendChild(wrapper)
     })
 
-    columnas[2].addEventListener("mouseout",function() {
-
+    equipo.addEventListener("mouseout",function() {
+        let escudo = filasTabla[i].getElementsByTagName("td")[0]
+        escudo.removeChild(wrapper)
+        if(i === 1)
+            escudo.appendChild(feliz)
     })
 }
+
+function escudoEquipo(x) {
+    switch (x) {
+        case 1:
+            return "../img/barça.png"
+        case 2:
+            return "../img/RM.png"
+        case 3:
+            return "../img/AM.png"
+        case 4:
+            return "../img/RS.png"
+        case 5:
+            return "../img/betis.jpg"
+    }
+}
+
+//Parte 5
