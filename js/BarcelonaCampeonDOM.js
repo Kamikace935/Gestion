@@ -1,5 +1,5 @@
 //console.log(document.querySelector("tr"))
-console.log(document.getElementsByTagName("tr"))
+//console.log(document.getElementsByTagName("tr"))
 
 //Parte 1
 let filasTabla = document.querySelectorAll("tr")
@@ -84,7 +84,6 @@ function palmares(columna, ultimos) {
                 wrapper =document.createElement("img")
                 wrapper.src = "../img/circulo.png"
                 columna.appendChild(wrapper)
-                console.log(wrapper)
                 break;
             case -1:
                 wrapper =document.createElement("img")
@@ -119,8 +118,21 @@ for (let i = 1; i<filasTabla.length; i++) {
 
 //Parte 4, 5 y 6
 //4
-feliz = document.getElementsByTagName("img")[0]
-wrapper = document.createElement("img")
+wrapper
+
+for (let i = 1; i<filasTabla.length; i++){
+    columnas = filasTabla[i].getElementsByTagName("td")
+
+    if (i === 1) {
+        columnas[0].getElementsByTagName("img")[0].src = escudoEquipo(i)
+    }else {
+        wrapper = document.createElement("img")
+        wrapper.src = escudoEquipo(i)
+        console.log(wrapper)
+        columnas[0].appendChild(wrapper)
+    }
+}
+
 //5
 let cont = [
     {equipo: "",visita: 0},
@@ -137,68 +149,82 @@ for (let i = 1;i<filasTabla.length;i++) {
 
     equipo.addEventListener("mouseover",function() {
         let escudo = filasTabla[i].getElementsByTagName("td")[0]
-        if(i === 1)
-            escudo.removeChild(feliz)
-        wrapper.setAttribute("src", escudoEquipo(i,cont))
-        escudo.appendChild(wrapper)
+        //feliz.style = escudo.style
+        //escudo.setAttribute("style", escudazoEquipo(i,cont))
     })
 
     equipo.addEventListener("mouseout",function() {
-        //4
         let escudo = filasTabla[i].getElementsByTagName("td")[0]
-        escudo.removeChild(wrapper)
-        if(i === 1)
-            escudo.appendChild(feliz)
-        //6
+        //
+
         if(document.getElementById("lista") != null)
             document.body.removeChild(document.getElementById("lista"))
 
         document.body.appendChild(popularidad(cont))
     })
+
 }
 //6
 document.body.appendChild(popularidad(cont))
 
+function escudoEquipo(posicion) {
+    switch (posicion) {
+        case 1:
+            return "../img/barça.png";
+        case 2:
+            return "../img/RM.png";
+        case 3:
+            return "../img/AM.png";
+        case 4:
+            return "../img/RS.png";
+        case 5:
+            return "../img/betis.jpg";
+        default:
+            console.log("ups")
+    }
+}
+
 //4-5-6
-function escudoEquipo(x,cont) {
+function escudazoEquipo(posicion,cont) {
     let equipo
-    switch (x) {
+    switch (posicion) {
         case 1:
             equipo = filasTabla[1].getElementsByTagName("td")[2]
             cont.map((cont) => {
                 if(cont.equipo === equipo.textContent)
                     cont.visita++
             })
-            return "../img/barça.png"
+            break;
         case 2:
             equipo = filasTabla[2].getElementsByTagName("td")[2]
             cont.map((cont) => {
                 if(cont.equipo === equipo.textContent)
                     cont.visita++
             })
-            return "../img/RM.png"
+            break;
         case 3:
             equipo = filasTabla[3].getElementsByTagName("td")[2]
             cont.map((cont) => {
                 if(cont.equipo === equipo.textContent)
                     cont.visita++
             })
-            return "../img/AM.png"
+            break;
         case 4:
             equipo = filasTabla[4].getElementsByTagName("td")[2]
             cont.map((cont) => {
                 if(cont.equipo === equipo.textContent)
                     cont.visita++
             })
-            return "../img/RS.png"
+            break;
         case 5:
             equipo = filasTabla[5].getElementsByTagName("td")[2]
             cont.map((cont) => {
                 if(cont.equipo === equipo.textContent)
                     cont.visita++
             })
-            return "../img/betis.jpg"
+            break;
     }
+    return ""
 }
 
 //6
@@ -213,6 +239,4 @@ function popularidad(x){
     })
     return cuerpo
 }
-
-
 
