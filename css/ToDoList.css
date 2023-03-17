@@ -1,0 +1,18 @@
+.tarea{
+    empty-cells: hide;
+    border: solid;
+    padding: 0.2em;
+    text-align: center;
+    font-family: "Comic Sans MS", sans-serif;
+}
+
+table{
+    empty-cells: hide;
+    margin: 1em;
+    border: solid;
+    padding: 0;
+}
+
+tr{
+   margin: 1em;
+}
