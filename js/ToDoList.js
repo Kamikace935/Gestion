@@ -1,15 +1,16 @@
 const button = document.getElementById('grab')
 button.addEventListener("click", coger)
 function coger() {
-    crearTabla()
     const toDo = document.getElementById('quehaceres')
-    const list = document.getElementById('list')
-    const fila = document.createElement('tr')
-    const reminder = document.createElement('td')
-    const erase = document.createElement('button')
-    const modify = document.createElement('button')
 
     if(toDo.value !== "") {
+        crearTabla()
+        const fila = document.createElement('tr')
+        const reminder = document.createElement('td')
+        const erase = document.createElement('button')
+        const modify = document.createElement('button')
+        const list = document.getElementById('list')
+
         reminder.setAttribute("class", "tarea")
         reminder.textContent = toDo.value
         toDo.value = ""
@@ -55,7 +56,10 @@ function deleteToDo(fila, list) {
 }
 
 function modifyToDo(fila) {
-    const colum = document.createElement('td')
-    const text = document.createElement('text')
-    const button = document.createElement('button')
+    let texto = fila.getElementsByTagName('td')[0]
+    let tarea = prompt("¿Cual es la nueva tarea?")
+
+    if(tarea.length > 0) {
+        texto.textContent = tarea
+    }
 }
