@@ -1,4 +1,3 @@
-//queremos una lista actualizable al estilo buscador con promise como hace google
 const url = 'https://api.github.com/users/Kamikace935/repos'
 
 let buscona = document.getElementById("buscona");
@@ -8,14 +7,9 @@ function busqueda() {
     fetch(url).then(response => response.json()).then(repos => {
         const reposList = repos.map(repo => repo.name)
 
-        let valor = new RegExp(buscona.value)
-
         if (buscona.value !== "") {
-            document.body.appendChild(encuentro(reposList
-                .filter(
-                    repo => repo.startsWith(buscona.value.toLowerCase()) || repo.startsWith(buscona.value.toUpperCase())
-                )
-            ))
+            const datos = reposList.filter(repo => repo.toLowerCase().startsWith(buscona.value.toLowerCase()))
+            document.body.appendChild(encuentro(datos))
         } else {
             document.getElementsByTagName('ul')[0].remove()
         }
