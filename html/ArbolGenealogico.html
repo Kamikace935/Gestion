@@ -10,7 +10,7 @@
 
 <body>
     <script>
-        var year = anio(1900)
+        const year = anio(1900)
 
         function crearNodoPadre() {
             return {
@@ -25,8 +25,8 @@
 
         function buscar(lista, nombre, anio) {
             let nodo
-            for (i = 0; i < lista.length; i++) {
-                if (lista[i].nombre === nombre && lista[i].anoNac == anio) {
+            for (let i = 0; i < lista.length; i++) {
+                if (lista[i].nombre === nombre && lista[i].anoNac === anio) {
                     return lista[i]
                 } else if (lista[i].hijos.length !== 0) {
                     return buscar(lista[i].hijos, nombre,anio)
@@ -48,7 +48,7 @@
 
         nodoP = crearNodoPadre()
 
-        var hijo = {
+        let hijo = {
             nombre: "Pepito",
                 anoNac: year(),
                 sexo: "H",

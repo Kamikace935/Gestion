@@ -7,13 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-        <input type="text" id="n">
+    <label for="n"></label>
+    <input type="text" id="n">
         
 
     <script>
-        var n = document.getElementById("n").value;
+        let n = document.getElementById("n").value;
         function factorial(n){
-            if(n == 1){
+            if(n === 1){
                 return 1;
             }else{
                 return n* factorial(n-1)
@@ -21,7 +22,7 @@
         }
 
         function potencia(b,e){
-            if(e==1){
+            if(e === 1){
                 return b*e;
             }else{
                 return b *potencia(b,e-1);

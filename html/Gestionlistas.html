@@ -14,10 +14,10 @@
             if (Array.isArray(liar)) {
                 let lista = {}
                 let p = lista
-                for (i = 0; i < liar.length; i++) {
+                for (let i = 0; i < liar.length; i++) {
                     p.nombre = liar[i]
                     p.nota = null
-                    if (i == (liar.length - 1)) {
+                    if (i === (liar.length - 1)) {
                         p.sig = null
                     } else {
                         p.sig = {}
@@ -31,7 +31,7 @@
         }
 
         arr = ["Marta", "Jorge", "Aitor"]
-        var list = arrayALista(arr)
+        let list = arrayALista(arr);
         console.log(list)
 
         function listaAArray(liar) {
@@ -53,13 +53,13 @@
             return arr
         }
 
-        var arra = listaAArray(list)
+        const arra = listaAArray(list);
         console.log(arra)
 
         function personaN(n) {
             let run = n
             let obj = null
-            while (run != 0) {
+            while (run !== 0) {
                 if (obj !== null) {
                     if (obj.sig !== null) {
                         obj = obj.sig
@@ -74,7 +74,7 @@
             return obj
         }
 
-        var segundo = personaN(2)
+        const segundo = personaN(2);
         console.log(segundo)
 
         function modifNota(n, note) {
