@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Productos</title>
 
-</body>
+    </head>
+    <body>
+        <h1>Productos</h1>
+        <form>
+            <label for="codigo">Código Producto:</label>
+            <input type="text" id="codigo" name="codigo"><br><br>
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion"><br><br>
+            <label for="importe">Importe:</label>
+            <input type="number" id="importe" name="importe"><br><br>
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock"><br><br>
+            <button type="submit" id="guardar" onclick="guardarProducto()">Guardar</button>
+        </form>
+
+        <h2>Lista de productos</h2>
+
+        <label for="buscador">Buscador:</label>
+        <label for="campo-busqueda"></label><select id="campo-busqueda" name="campo-busqueda">
+            <option value="codigo">Código Producto</option>
+            <option value="descripcion">Descripción</option>
+        </select>
+        <input type="text" id="buscador" name="buscador"><br/>
+
+        <table id="">
+            <thead>
+                <tr>
+                    <th>Código Producto</th>
+                    <th>Descripción</th>
+                    <th>Importe</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody id="resultados-busqueda">
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../js/Mercadona27.3.js"></script>
+    </body>
 </html>
