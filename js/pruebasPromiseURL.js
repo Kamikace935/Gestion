@@ -1,26 +1,24 @@
-const arr = ["fruta", "banana", "zorro", "perro", "sapa", "marsopa", "verano", "fruto", "bananero", "zorra", "furro"]
+const url = 'https://api.github.com/users/Kamikace935/repos'
 
 let buscona = document.getElementById("buscona");
 buscona.addEventListener("input", busqueda)
 
-const listado = new Promise(function(resolve) {
-    let ara = []
-    resolve(ara)
-})
-
 function busqueda() {
-    listado.then((datos) => {
+    fetch(url).then(response => response.json()).then(repos => {
+        const reposList = repos.map(repo => repo.name)
+
         if (buscona.value !== "") {
-            datos = arr.filter(repo => repo.toLowerCase().startsWith(buscona.value.toLowerCase()))
-            document.body.appendChild(encuentra(datos))
+            const datos = reposList.filter(repo => repo.toLowerCase().startsWith(buscona.value.toLowerCase()))
+            document.body.appendChild(encuentro(datos))
         } else {
             document.getElementsByTagName('ul')[0].remove()
         }
-    })
+
+    }).catch(err => console.log(err))
 
 }
 
-function encuentra(datos) {
+function encuentro(datos) {
     let list = document.getElementsByTagName('ul')
 
     if(list.length > 0) {
@@ -37,3 +35,5 @@ function encuentra(datos) {
 
     return list
 }
+
+
