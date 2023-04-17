@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Productos</title>
-
+        <link rel="stylesheet" href="../css/Mercadona27.3.css">
     </head>
     <body>
         <h1>Productos</h1>
@@ -19,6 +19,8 @@
             <button type="submit" id="guardar" onclick="guardarProducto()">Guardar</button>
         </form>
 
+        <br>
+
         <h2>Lista de productos</h2>
 
         <label for="buscador">Buscador:</label>
@@ -28,7 +30,7 @@
         </select>
         <input type="text" id="buscador" name="buscador"><br/>
 
-        <table id="">
+        <table>
             <thead>
                 <tr>
                     <th>Código Producto</th>
@@ -38,6 +40,23 @@
                 </tr>
             </thead>
             <tbody id="resultados-busqueda">
+            </tbody>
+        </table>
+
+        <br><br>
+
+        <h2>Carrito de la compra</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Código Producto</th>
+                <th>Descripción</th>
+                <th>Importe</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+            </tr>
+            </thead>
+            <tbody id="productos-carrito">
             </tbody>
         </table>
         <script type="text/javascript" src="../js/Mercadona27.3.js"></script>

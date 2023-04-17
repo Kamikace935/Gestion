@@ -68,7 +68,7 @@ function actualizarTablaProductos(productos) {
     tablaResultados.innerHTML = ""; // limpia la tabla antes de actualizarla
 
     productos.forEach(producto => {
-        const fila = document.createElement("tr");
+        let fila = document.createElement("tr");
 
         const codigo = document.createElement("td");
         codigo.textContent = producto.codigo;
@@ -93,13 +93,56 @@ function actualizarTablaProductos(productos) {
 
         const anadir = document.createElement("button");
         anadir.textContent = "Añadir al Carro"
-        anadir.addEventListener("click", function(){anadirCarrito(cantidad.value)})
+        anadir.addEventListener("click", function(){anadirCarrito(parseInt(cantidad.value), producto)})
         fila.appendChild(anadir)
 
         tablaResultados.appendChild(fila);
     });
 }
 
-function anadirCarrito(cantidad) {
+function anadirCarrito(cantidad, producto) {
+    if(!Number.isInteger(cantidad)) {
+        alert("Debe introducir la cantidad númerica");
+    } else if(cantidad > producto.stock && producto.stock!==0) {
+        alert("No tenemos la cantidad de existencias que demanda");
+    } else {
+        const carrito = document.getElementById("productos-carrito");
+        console.log(carrito)
 
+        let fila = document.createElement("tr");
+
+        const codigo = document.createElement("td");
+        codigo.textContent = producto.codigo;
+        codigo.setAttribute("id", producto.codigo)
+        fila.appendChild(codigo);
+
+        const descripcion = document.createElement("td");
+        descripcion.textContent = producto.descripcion;
+        descripcion.setAttribute("id", producto.descripcion)
+        fila.appendChild(descripcion);
+
+        const importe = document.createElement("td");
+        importe.textContent = producto.importe;
+        fila.appendChild(importe);
+
+        const nProductos = document.createElement("td");
+        producto.stock -= cantidad;
+        nProductos.textContent = cantidad;
+        fila.appendChild(nProductos);
+
+        const pUnitario = document.createElement("td");
+        pUnitario.textContent = (cantidad*producto.importe).toString();
+
+        const quitar = document.createElement("button");
+        quitar.textContent = "Quitar"
+        quitar.addEventListener("click", function(){quitarProducto(fila,producto, cantidad)});
+        fila.appendChild(quitar);
+
+        carrito.appendChild(fila);
+    }
+}
+
+function quitarProducto(fila,producto,cantidad) {
+    producto.stock += cantidad;
+    fila.outerHTML="";
 }
