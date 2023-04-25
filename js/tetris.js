@@ -8,43 +8,42 @@ function getRandomInt(min, max) {
 
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-// generate a new tetromino sequence
+// Genera una nueva secuencia de tetrominó
 // @see https://tetris.fandom.com/wiki/Random_Generator
 function generateSequence() {
-    const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
+    const bag = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
 
-    while (sequence.length) {
-        const rand = getRandomInt(0, sequence.length - 1);
-        const name = sequence.splice(rand, 1)[0];
+    while (bag.length) {
+        const rand = Math.floor(Math.random() * (bag.length));
+        const name = bag.splice(rand, 1)[0];
         tetrominoSequence.push(name);
     }
 }
 
-// get the next tetromino in the sequence
+// Coge el siguiente tetromino de la secuencia
 function getNextTetromino() {
     if (tetrominoSequence.length === 0) {
         generateSequence();
     }
 
     const name = tetrominoSequence.pop();
-    const matrix = tetrominos[name];
+    const matrix = tetrominoes[name];
 
-    // I and O start centered, all others start in left-middle
+    // Las figuras I y O empiezan centradas, las demás en el centro-izquierda
     const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
 
-    // I starts on row 21 (-1), all others start on row 22 (-2)
+    // La figura I empieza en la fila 21 (-1), el resto desde la fila 22 (-2)
     const row = name === 'I' ? -1 : -2;
 
     return {
-        name: name,      // name of the piece (L, O, etc.)
-        matrix: matrix,  // the current rotation matrix
-        row: row,        // current row (starts offscreen)
-        col: col         // current col
+        name: name,      // Nombre de la figura
+        matrix: matrix,  // La rotación actual de la matriz
+        row: row,        // Fila actual (Inicia fuera de la pantalla)
+        col: col         // Columna actual
     };
 }
 
-// rotate an NxN matrix 90deg
+// Rotación de la matriz 90º
 // @see https://codereview.stackexchange.com/a/186834
 function rotate(matrix) {
     const N = matrix.length - 1;
@@ -54,16 +53,16 @@ function rotate(matrix) {
     );
 }
 
-// check to see if the new matrix/row/col is valid
+// Comprueba si el movimiento de la matriz es válido
 function isValidMove(matrix, cellRow, cellCol) {
     for (let row = 0; row < matrix.length; row++) {
         for (let col = 0; col < matrix[row].length; col++) {
             if (matrix[row][col] && (
-                // outside the game bounds
+                // Sobresale de los límites del juego
                 cellCol + col < 0 ||
                 cellCol + col >= playfield[0].length ||
                 cellRow + row >= playfield.length ||
-                // collides with another piece
+                // Colisión con otra figura
                 playfield[cellRow + row][cellCol + col])
             ) {
                 return false;
@@ -74,13 +73,13 @@ function isValidMove(matrix, cellRow, cellCol) {
     return true;
 }
 
-// place the tetromino on the playfield
+// Coloca el tetromino en el juego
 function placeTetromino() {
     for (let row = 0; row < tetromino.matrix.length; row++) {
         for (let col = 0; col < tetromino.matrix[row].length; col++) {
             if (tetromino.matrix[row][col]) {
 
-                // game over if piece has any part offscreen
+                // Termina el juego si cualquier parte de una figura se sale de la pantalla
                 if (tetromino.row + row < 0) {
                     return showGameOver();
                 }
@@ -90,11 +89,11 @@ function placeTetromino() {
         }
     }
 
-    // check for line clears starting from the bottom and working our way up
+    // Comprueba las líneas que puede eliminar desde el fondo hasta la parte de arriba
     for (let row = playfield.length - 1; row >= 0; ) {
         if (playfield[row].every(cell => !!cell)) {
 
-            // drop every row above this one
+            // Elimina cada fila por encima de esta
             for (let r = row; r >= 0; r--) {
                 for (let c = 0; c < playfield[r].length; c++) {
                     playfield[r][c] = playfield[r-1][c];
@@ -105,37 +104,64 @@ function placeTetromino() {
             row--;
         }
     }
-
+    //colocar variable para la siguiente ficha
     tetromino = getNextTetromino();
 }
 
-// show the game over screen
+// Muestra la pantalla de final de juego
+// Mejorar implementación input text
 function showGameOver() {
     cancelAnimationFrame(rAF);
     gameOver = true;
 
-    context.fillStyle = 'black';
-    context.globalAlpha = 0.75;
-    context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
+    input.type = "text";
+    input.maxLength = 3;
+    input.placeholder = "Escribe algo";
+    input.style.position = "absolute";
+    input.style.left = canvas.offsetLeft + "px";
+    input.style.top = canvas.offsetTop + "px";
+    input.opacity = 0;
+    canvas.parentNode.appendChild(input);
+    input.focus();
+
+
+
+    context.fillStyle = 'grey';
+    context.globalAlpha = 0.85;
+    context.fillRect(0, canvas.height / 2 - 32, canvas.width, 90);
 
     context.globalAlpha = 1;
     context.fillStyle = 'white';
     context.font = '36px monospace';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
-    context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+    context.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
+    context.font = "20px monospace";
+    context.fillText('Nickname:', canvas.width / 2 - 60, canvas.height / 2 + 35);
+
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+    input.addEventListener("input", () => {
+        context.putImageData(imageData, 0,0);
+        context.fillStyle = 'white';
+        context.font = "25px monospace";
+
+        context.fillText(input.value.toUpperCase(), canvas.width / 2 + 15, canvas.height / 2 + 35);
+    });
 }
 
 const canvas = document.getElementById('game');
+// @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
 const context = canvas.getContext('2d');
+const input = document.createElement("input");
 const grid = 32;
 const tetrominoSequence = [];
 
-// keep track of what is in every cell of the game using a 2d array
-// tetris playfield is 10x20, with a few rows offscreen
+// Mantiene un seguimiento de lo que hay en cada celda del juego usando un array bidimensional
+// La pantalla es de 10x20 con una fila sobresaliente por la parte superior
 const playfield = [];
 
-// populate the empty state
+// Rellena el tablero
 for (let row = -2; row < 20; row++) {
     playfield[row] = [];
 
@@ -144,9 +170,9 @@ for (let row = -2; row < 20; row++) {
     }
 }
 
-// how to draw each tetromino
+// Como formar cada tetromino
 // @see https://tetris.fandom.com/wiki/SRS
-const tetrominos = {
+const tetrominoes = {
     'I': [
         [0,0,0,0],
         [1,1,1,1],
@@ -184,7 +210,7 @@ const tetrominos = {
     ]
 };
 
-// color of each tetromino
+// Color de cada tetromino
 const colors = {
     'I': 'cyan',
     'O': 'yellow',
@@ -197,15 +223,15 @@ const colors = {
 
 let count = 0;
 let tetromino = getNextTetromino();
-let rAF = null;  // keep track of the animation frame, so we can cancel it
+let rAF = null;  // Mantiene un seguimiento de los frames de animación para poder cancelarlo
 let gameOver = false;
 
-// game loop
+// bucle de juego
 function loop() {
     rAF = requestAnimationFrame(loop);
     context.clearRect(0,0,canvas.width,canvas.height);
 
-    // draw the playfield
+    // Dibuja el tablero
     for (let row = 0; row < 20; row++) {
         for (let col = 0; col < 10; col++) {
             if (playfield[row][col]) {

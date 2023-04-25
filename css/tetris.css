@@ -10,6 +10,32 @@ body {
     justify-content: center;
 }
 
-canvas {
+div{
+    margin-right: 20px;
+    margin-bottom: 460px;
+    display: flex;
+    flex-direction: column;
+}
+
+.counter{
+    margin-bottom: 20px;
     border: 2px solid white;
+}
+
+.score {
+    border: 2px solid white;
+}
+
+#game{
+    border: 4px solid violet;
+}
+
+.storage{
+    margin-left: 20px;
+    margin-bottom: 480px;
+    border: 2px solid greenyellow;
+}
+
+input {
+    opacity: 0;
 }
